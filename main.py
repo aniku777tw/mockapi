@@ -14,7 +14,9 @@ app = FastAPI(
 
 # 註冊路由
 from api.package_routes import router as package_router
+from api.module_routes import router as module_router
 app.include_router(package_router)
+app.include_router(module_router)
 
 # 自定義異常處理器
 @app.exception_handler(HTTPException)

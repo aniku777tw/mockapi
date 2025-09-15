@@ -74,10 +74,22 @@ async def get_packages(
         
         # 獲取多個套裝旅遊行程
         packages = []
+        not_found_ids = []
+        
         for package_id in package_id_list:
             package = package_service.get_package(package_id, is_preview=is_preview)
             if package:
                 packages.append(package)
+            else:
+                not_found_ids.append(package_id)
+        
+        # 如果所有查詢的 package ID 都不存在，回傳 404 錯誤
+        if not packages and not_found_ids:
+            error_response = ErrorResponse(
+                status=Status(code="404", msg="找不到指定的套裝旅遊行程"),
+                data={"notFoundIds": not_found_ids, "requestedIds": package_id_list}
+            )
+            raise HTTPException(status_code=404, detail=error_response.dict())
         
         # 根據 locale 和 currency 進行處理（這裡可以添加價格轉換等邏輯）
         # 目前先返回原始數據
