@@ -48,7 +48,7 @@ async def get_packages(
             datetime.strptime(activityStartDate, "%Y-%m-%d")
         except ValueError:
             error_response = ErrorResponse(
-                status=Status(code="400", msg="activityStartDate 格式錯誤，請使用 YYYY-MM-DD 格式"),
+                status=Status(code="CP01005", msg="activityStartDate 格式錯誤，請使用 YYYY-MM-DD 格式"),
                 data={"field": "activityStartDate", "value": activityStartDate, "expectedFormat": "YYYY-MM-DD"}
             )
             raise HTTPException(status_code=400, detail=error_response.dict())
@@ -58,13 +58,13 @@ async def get_packages(
             package_id_list = [int(id.strip()) for id in packageIds.split(",") if id.strip()]
             if not package_id_list:
                 error_response = ErrorResponse(
-                    status=Status(code="400", msg="packageIds 不能為空，請提供有效的套裝旅遊行程 ID"),
+                    status=Status(code="CP01005", msg="packageIds 不能為空，請提供有效的套裝旅遊行程 ID"),
                     data={"field": "packageIds", "value": packageIds}
                 )
                 raise HTTPException(status_code=400, detail=error_response.dict())
         except ValueError:
             error_response = ErrorResponse(
-                status=Status(code="400", msg="packageIds 格式錯誤，請使用逗號分隔的整數"),
+                status=Status(code="CP01005", msg="packageIds 格式錯誤，請使用逗號分隔的整數"),
                 data={"field": "packageIds", "value": packageIds, "expectedFormat": "逗號分隔的整數"}
             )
             raise HTTPException(status_code=400, detail=error_response.dict())
@@ -86,7 +86,7 @@ async def get_packages(
         # 如果所有查詢的 package ID 都不存在，回傳 404 錯誤
         if not packages and not_found_ids:
             error_response = ErrorResponse(
-                status=Status(code="404", msg="找不到指定的套裝旅遊行程"),
+                status=Status(code="CP01005", msg="找不到指定的套裝旅遊行程"),
                 data={"notFoundIds": not_found_ids, "requestedIds": package_id_list}
             )
             raise HTTPException(status_code=404, detail=error_response.dict())
@@ -117,7 +117,7 @@ async def get_package(
         package = package_service.get_package(package_id, is_preview=is_preview)
         if not package:
             error_response = ErrorResponse(
-                status=Status(code="404", msg="套裝旅遊行程不存在"),
+                status=Status(code="CP01005", msg="套裝旅遊行程不存在"),
                 data={"packageId": package_id}
             )
             raise HTTPException(status_code=404, detail=error_response.dict())
@@ -130,7 +130,7 @@ async def get_package(
         raise
     except Exception as e:
         error_response = ErrorResponse(
-            status=Status(code="500", msg="伺服器內部錯誤"),
+            status=Status(code="CP01005", msg="伺服器內部錯誤"),
             data={"error": str(e)}
         )
         raise HTTPException(status_code=500, detail=error_response.dict())

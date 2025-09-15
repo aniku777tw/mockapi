@@ -27,10 +27,26 @@ async def get_package_modules(
 ):
     """獲取套裝旅遊行程模組數據"""
     try:
+        # 驗證 activity_id 必須為正整數
+        if activity_id <= 0:
+            error_response = ErrorResponse(
+                status=Status(code="CP01005", msg="activityId 必須為正整數"),
+                data={"field": "activityId", "value": activity_id}
+            )
+            raise HTTPException(status_code=400, detail=error_response.dict())
+        
+        # 驗證 package_id 必須為正整數
+        if package_id <= 0:
+            error_response = ErrorResponse(
+                status=Status(code="CP01005", msg="packageId 必須為正整數"),
+                data={"field": "packageId", "value": package_id}
+            )
+            raise HTTPException(status_code=400, detail=error_response.dict())
+        
         # 驗證 activityStartDate 不能為空
         if not activityStartDate or not activityStartDate.strip():
             error_response = ErrorResponse(
-                status=Status(code="400", msg="activityStartDate 為必填參數，不能為空"),
+                status=Status(code="CP01005", msg="activityStartDate 為必填參數，不能為空"),
                 data={"field": "activityStartDate", "value": activityStartDate}
             )
             raise HTTPException(status_code=400, detail=error_response.dict())
@@ -41,7 +57,7 @@ async def get_package_modules(
             datetime.strptime(activityStartDate, "%Y-%m-%d")
         except ValueError:
             error_response = ErrorResponse(
-                status=Status(code="400", msg="activityStartDate 格式錯誤，請使用 YYYY-MM-DD 格式"),
+                status=Status(code="CP01005", msg="activityStartDate 格式錯誤，請使用 YYYY-MM-DD 格式"),
                 data={"field": "activityStartDate", "value": activityStartDate, "expectedFormat": "YYYY-MM-DD"}
             )
             raise HTTPException(status_code=400, detail=error_response.dict())
@@ -54,7 +70,7 @@ async def get_package_modules(
         
         if not modules_data:
             error_response = ErrorResponse(
-                status=Status(code="404", msg="套裝旅遊行程模組不存在"),
+                status=Status(code="CP01005", msg="套裝旅遊行程模組不存在"),
                 data={"activityId": activity_id, "packageId": package_id}
             )
             raise HTTPException(status_code=404, detail=error_response.dict())
@@ -67,7 +83,7 @@ async def get_package_modules(
         raise
     except Exception as e:
         error_response = ErrorResponse(
-            status=Status(code="500", msg="伺服器內部錯誤"),
+            status=Status(code="CP50001", msg="伺服器內部錯誤"),
             data={"error": str(e)}
         )
         raise HTTPException(status_code=500, detail=error_response.dict())
