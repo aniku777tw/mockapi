@@ -60,11 +60,13 @@ class PriceService:
                         total_price += ticket_offering.price * ticket_req["count"]
                         break
         
-        # 構建 optionsMap (從 moduleOptionIds 轉換)
+        # 構建 optionsMap (從 moduleOptionIds 轉換為選項名稱)
         options_map = []
         for option_id in target_combination.moduleOptionIds:
             if option_id:
-                options_map.append(str(option_id))
+                # 從模組資料中找到對應的選項名稱
+                option_name = self._find_option_name(modules_data.modules, option_id)
+                options_map.append(option_name if option_name else str(option_id))
             else:
                 options_map.append(None)
         
@@ -81,3 +83,11 @@ class PriceService:
             useDiscount=False,  # 測試資料固定為 false
             discountPrice=0  # 測試資料固定為 0
         )
+    
+    def _find_option_name(self, modules, option_id):
+        """從模組資料中找到選項名稱"""
+        for module in modules:
+            for option in module.options:
+                if option.id == option_id:
+                    return option.name
+        return None
