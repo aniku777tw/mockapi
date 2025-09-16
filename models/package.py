@@ -5,7 +5,7 @@ Package Models
 """
 
 from pydantic import BaseModel
-from typing import Optional
+from typing import List, Optional
 from constants.pricing import PricingMethod
 
 
@@ -17,3 +17,8 @@ class Package(BaseModel):
     isSoldOut: bool
     lowestPrice: Optional[int] = None
     pricingMethod: PricingMethod
+
+
+class GetPackagesData(BaseModel):
+    """獲取多個套裝旅遊行程的回應資料"""
+    packages: List[Package]

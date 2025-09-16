@@ -7,7 +7,7 @@ Package Routes
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from datetime import datetime
-from models.package import Package
+from models.package import Package, GetPackagesData
 from services.package_service import PackageService
 from models.response import CustomResponse, Status, ErrorResponse
 
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/packages", tags=["套裝旅遊行程"])
 package_service = PackageService()
 
 
-@router.get("", response_model=CustomResponse[List[Package], str])
+@router.get("", response_model=CustomResponse[GetPackagesData, str])
 async def get_packages(
     packageIds: str = Query(..., description="套裝旅遊行程 ID 列表，用逗號分隔"),
     activityStartDate: str = Query(..., description="活動開始日期 (YYYY-MM-DD 格式)"),
@@ -96,7 +96,7 @@ async def get_packages(
         
         return CustomResponse(
             status=Status(code="0", msg="success"),
-            data=packages
+            data={"packages": packages}
         )
     except HTTPException:
         raise
