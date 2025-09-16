@@ -91,9 +91,9 @@ async def calculate_package_price(
         # 驗證 ticketCount 格式
         if request.ticketCount:
             for i, ticket in enumerate(request.ticketCount):
-                if ticket.count <= 0:
+                if ticket.count < 0:
                     error_response = ErrorResponse(
-                        status=Status(code="CP01005", msg=f"ticketCount[{i}].count 必須為正整數"),
+                        status=Status(code="CP01005", msg=f"ticketCount[{i}].count 不能為負數"),
                         data={"field": f"ticketCount[{i}].count", "value": ticket.count}
                     )
                     raise HTTPException(status_code=400, detail=error_response.dict())
