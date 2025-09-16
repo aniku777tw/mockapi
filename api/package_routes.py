@@ -17,7 +17,7 @@ router = APIRouter(prefix="/packages", tags=["套裝旅遊行程"])
 package_service = PackageService()
 
 
-@router.get("/list", response_model=CustomResponse[List[Package], str])
+@router.get("", response_model=CustomResponse[List[Package], str])
 async def get_packages(
     packageIds: str = Query(..., description="套裝旅遊行程 ID 列表，用逗號分隔"),
     activityStartDate: str = Query(..., description="活動開始日期 (YYYY-MM-DD 格式)"),
@@ -102,35 +102,3 @@ async def get_packages(
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-
-@router.get("/{package_id}", response_model=CustomResponse[Package, str])
-async def get_package(
-    package_id: int,
-    isPreview: Optional[str] = Query("false", description="是否為預覽模式")
-):
-    """獲取單個套裝旅遊行程"""
-    try:
-        # 解析 isPreview 參數
-        is_preview = isPreview.lower() == "true" if isPreview else False
-        
-        package = package_service.get_package(package_id, is_preview=is_preview)
-        if not package:
-            error_response = ErrorResponse(
-                status=Status(code="CP01005", msg="套裝旅遊行程不存在"),
-                data={"packageId": package_id}
-            )
-            raise HTTPException(status_code=404, detail=error_response.dict())
-        
-        return CustomResponse(
-            status=Status(code="0", msg="success"),
-            data=package
-        )
-    except HTTPException:
-        raise
-    except Exception as e:
-        error_response = ErrorResponse(
-            status=Status(code="CP01005", msg="伺服器內部錯誤"),
-            data={"error": str(e)}
-        )
-        raise HTTPException(status_code=500, detail=error_response.dict())

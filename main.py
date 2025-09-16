@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
 from models.response import CustomResponse, Status, Message, ErrorResponse
@@ -10,6 +11,15 @@ app = FastAPI(
     title="Package Service API",
     description="套裝旅遊行程管理 API 服務",
     version="1.0.0"
+)
+
+# 添加 CORS 中間件
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 允許所有來源，生產環境建議指定具體域名
+    allow_credentials=True,
+    allow_methods=["*"],  # 允許所有 HTTP 方法
+    allow_headers=["*"],  # 允許所有標頭
 )
 
 # 註冊路由
