@@ -27,7 +27,6 @@ MODULES_MOCK_DATA = {
                 "name": "導覽服務",
                 "isShowEmpty": True,
                 "options": [
-                    {"id": 1021, "name": "無導覽", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 1022, "name": "中文導覽", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 1023, "name": "英文導覽", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 1024, "name": "日文導覽", "inventoryStatus": INVENTORY_STATUS["NO_COMBINATION"]},
@@ -39,7 +38,6 @@ MODULES_MOCK_DATA = {
                 "name": "附加服務",
                 "isShowEmpty": True,
                 "options": [
-                    {"id": 1031, "name": "無附加服務", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 1032, "name": "專業攝影", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 1033, "name": "紀念品包", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 1034, "name": "豪華紀念品包", "inventoryStatus": INVENTORY_STATUS["SOLD_OUT"]},
@@ -48,8 +46,8 @@ MODULES_MOCK_DATA = {
         ],
         "availableCombinations": [
             {
-                "combinationOptionId": "combo_[1011, 1021, 1031]",
-                "moduleOptionIds": [1011, 1021, 1031],
+                "combinationOptionId": "combo_[1011, 1022, 1032]",
+                "moduleOptionIds": [1011, 1022, 1032],
                 "singleOffering": None,
                 "ticketOffering": [
                     {"id": TICKET_TYPE["ADULT"], "inventory": 50, "price": 600},
@@ -59,8 +57,8 @@ MODULES_MOCK_DATA = {
                 ]
             },
             {
-                "combinationOptionId": "combo_[1011, 1022, 1031]",
-                "moduleOptionIds": [1011, 1022, 1031],
+                "combinationOptionId": "combo_[1011, 1023, 1032]",
+                "moduleOptionIds": [1011, 1023, 1032],
                 "singleOffering": None,
                 "ticketOffering": [
                     {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 800},
@@ -90,6 +88,42 @@ MODULES_MOCK_DATA = {
                     {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 5, "price": 0},
                     {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 3, "price": 0},
                 ]
+            },
+            # 新增：不加購導覽服務的組合
+            {
+                "combinationOptionId": "combo_[1011, null, 1032]",
+                "moduleOptionIds": [1011, None, 1032],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 60, "price": 500},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 40, "price": 250},
+                    {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 25, "price": 0},
+                    {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 20, "price": 0},
+                ]
+            },
+            # 新增：不加購附加服務的組合
+            {
+                "combinationOptionId": "combo_[1012, 1022, null]",
+                "moduleOptionIds": [1012, 1022, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 30, "price": 700},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 20, "price": 350},
+                    {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 15, "price": 0},
+                    {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 10, "price": 0},
+                ]
+            },
+            # 新增：都不加購的組合
+            {
+                "combinationOptionId": "combo_[1011, null, null]",
+                "moduleOptionIds": [1011, None, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 80, "price": 400},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 50, "price": 200},
+                    {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 30, "price": 0},
+                    {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 25, "price": 0},
+                ]
             }
         ]
     },
@@ -114,7 +148,6 @@ MODULES_MOCK_DATA = {
                 "name": "文化活動",
                 "isShowEmpty": True,
                 "options": [
-                    {"id": 2021, "name": "無文化活動", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 2022, "name": "茶藝體驗", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 2023, "name": "書法體驗", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 2024, "name": "太極拳體驗", "inventoryStatus": INVENTORY_STATUS["NO_COMBINATION"]},
@@ -133,27 +166,48 @@ MODULES_MOCK_DATA = {
         ],
         "availableCombinations": [
             {
-                "combinationOptionId": "combo_[2011, 2021, 2031]",
-                "moduleOptionIds": [2011, 2021, 2031],
-                "singleOffering": {"name": "傳統小吃體驗券", "unitCount": 1, "inventory": 40, "price": 800},
+                "combinationOptionId": "combo_[2011, 2022, 2031]",
+                "moduleOptionIds": [2011, 2022, 2031],
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 40, "price": 800},
                 "ticketOffering": None
             },
             {
-                "combinationOptionId": "combo_[2011, 2022, 2031]",
-                "moduleOptionIds": [2011, 2022, 2031],
-                "singleOffering": {"name": "美食+茶藝體驗券", "unitCount": 1, "inventory": 20, "price": 1200},
+                "combinationOptionId": "combo_[2011, 2023, 2031]",
+                "moduleOptionIds": [2011, 2023, 2031],
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 20, "price": 1200},
                 "ticketOffering": None
             },
             {
                 "combinationOptionId": "combo_[2012, 2022, 2032]",
                 "moduleOptionIds": [2012, 2022, 2032],
-                "singleOffering": {"name": "高級餐廳+茶藝+專車券", "unitCount": 1, "inventory": 15, "price": 2500},
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 15, "price": 2500},
                 "ticketOffering": None
             },
             {
                 "combinationOptionId": "combo_[2015, 2023, 2032]",
                 "moduleOptionIds": [2015, 2023, 2032],
-                "singleOffering": {"name": "米其林+書法+專車券", "unitCount": 1, "inventory": 8, "price": 3500},
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 8, "price": 3500},
+                "ticketOffering": None
+            },
+            # 新增：不加購文化活動的組合
+            {
+                "combinationOptionId": "combo_[2011, null, 2031]",
+                "moduleOptionIds": [2011, None, 2031],
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 50, "price": 600},
+                "ticketOffering": None
+            },
+            # 新增：不加購交通方式的組合
+            {
+                "combinationOptionId": "combo_[2012, 2022, null]",
+                "moduleOptionIds": [2012, 2022, None],
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 25, "price": 1800},
+                "ticketOffering": None
+            },
+            # 新增：都不加購的組合
+            {
+                "combinationOptionId": "combo_[2011, null, null]",
+                "moduleOptionIds": [2011, None, None],
+                "singleOffering": {"name": "數量", "unitCount": 1, "inventory": 60, "price": 500},
                 "ticketOffering": None
             }
         ]
@@ -274,19 +328,38 @@ MODULES_MOCK_DATA = {
             {
                 "combinationOptionId": "combo_[5011, 5021]",
                 "moduleOptionIds": [5011, 5021],
-                "singleOffering": {"name": "基礎攝影服務券", "unitCount": 1, "inventory": 25, "price": 1500},
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 1500},
                 "ticketOffering": None
             },
             {
                 "combinationOptionId": "combo_[5012, 5022]",
                 "moduleOptionIds": [5012, 5022],
-                "singleOffering": {"name": "專業攝影服務券", "unitCount": 1, "inventory": 15, "price": 2500},
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 15, "price": 2500},
                 "ticketOffering": None
             },
             {
                 "combinationOptionId": "combo_[5013, 5023]",
                 "moduleOptionIds": [5013, 5023],
-                "singleOffering": {"name": "豪華攝影服務券", "unitCount": 1, "inventory": 8, "price": 3500},
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 8, "price": 3500},
+                "ticketOffering": None
+            },
+            # 新增：不加購照片數量的組合
+            {
+                "combinationOptionId": "combo_[5011, null]",
+                "moduleOptionIds": [5011, None],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 30, "price": 1200},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[5012, null]",
+                "moduleOptionIds": [5012, None],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 20, "price": 2000},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[5013, null]",
+                "moduleOptionIds": [5013, None],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 12, "price": 3000},
                 "ticketOffering": None
             }
         ]
@@ -396,6 +469,28 @@ MODULES_MOCK_DATA = {
                     {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 12, "price": 1100},
                     {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 8, "price": 0},
                     {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 5, "price": 0},
+                ]
+            },
+            # 新增：不加購交通方式的組合
+            {
+                "combinationOptionId": "combo_[8011, null]",
+                "moduleOptionIds": [8011, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 30, "price": 1500},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 20, "price": 750},
+                    {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 15, "price": 0},
+                ]
+            },
+            {
+                "combinationOptionId": "combo_[8012, null]",
+                "moduleOptionIds": [8012, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 1800},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 15, "price": 900},
+                    {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 12, "price": 0},
+                    {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 8, "price": 0},
                 ]
             }
         ]
