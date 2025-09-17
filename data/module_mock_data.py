@@ -494,5 +494,61 @@ MODULES_MOCK_DATA = {
                 ]
             }
         ]
-    }
+    },
+
+    # Package 9: 台北101+故宮聯票 (ticket pricing - 混合票券)
+    9: {
+        "modules": [
+            {
+                "id": 901,
+                "name": "參觀順序",
+                "isShowEmpty": False,
+                "options": [
+                    {"id": 9011, "name": "先101後故宮", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 9012, "name": "先故宮後101", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
+            },
+            {
+                "id": 902,
+                "name": "交通方式",
+                "isShowEmpty": True,
+                "options": [
+                    {"id": 9021, "name": "自行前往", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 9022, "name": "專車接送", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
+            }
+
+        ],
+        "availableCombinations": [
+            {
+                "combinationOptionId": "combo_[9011, null]",
+                "moduleOptionIds": [9011, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 15, "price": 0},
+                    {"id": TICKET_TYPE["TODDLER"], "age": 2, "inventory": 12, "price": 0},
+                    {"id": TICKET_TYPE["INFANT"], "age": 1, "inventory": 8, "price": 0},
+                ]
+            },
+            {
+                "combinationOptionId": "combo_[9012, null]",
+                "moduleOptionIds": [9012, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 15, "price": 0},
+                ]
+            } ,
+            {
+                "combinationOptionId": "combo_[9011, 9021]",
+                "moduleOptionIds": [9011, 9021],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 15, "price": 0},
+                ]
+            }
+        ]
+    },
 }

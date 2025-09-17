@@ -69,5 +69,13 @@ PACKAGES_MOCK_DATA = [
         "isSoldOut": False,
         "lowestPrice": 1800,
         "pricingMethod": "ticket"
-    }
+    },
+    {
+        "id": 9,
+        "name": "台北101+故宮聯票",
+        "bnbId": 66632,
+        "isSoldOut": False,
+        "lowestPrice": 0,
+        "pricingMethod": "ticket"
+    },
 ]
