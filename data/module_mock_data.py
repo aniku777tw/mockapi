@@ -549,6 +549,16 @@ MODULES_MOCK_DATA = {
                     {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 15, "price": 0},
                 ]
             }
+             ,
+            {
+                "combinationOptionId": "combo_[9011, 9022]",
+                "moduleOptionIds": [9011, 9022],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 1000},
+                    {"id": TICKET_TYPE["CHILDREN"], "age": 12, "inventory": 25, "price": 0},
+                ]
+            }
         ]
     },
 }
