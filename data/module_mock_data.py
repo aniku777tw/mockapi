@@ -629,18 +629,33 @@ MODULES_MOCK_DATA = {
                     {"id": 11011, "name": "先101後故宮", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 11012, "name": "先故宮後101", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                 ]
+            },
+            {
+                "id": 1102,
+                "name": "交通方式",
+                "isShowEmpty": True,
+                "options": [
+                    {"id": 11021, "name": "自行前往", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 11022, "name": "專車接送", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
             }
         ],
         "availableCombinations": [
             {
-                "combinationOptionId": "combo_[11011]",
-                "moduleOptionIds": [11011],
+                "combinationOptionId": "combo_[11011, null]",
+                "moduleOptionIds": [11011, None],
                 "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
                 "ticketOffering": None
             },
             {
-                "combinationOptionId": "combo_[11012]",
-                "moduleOptionIds": [11012],
+                "combinationOptionId": "combo_[11012, null]",
+                "moduleOptionIds": [11012, None],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[11011, 11021]",
+                "moduleOptionIds": [11011, 11021],
                 "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
                 "ticketOffering": None
             }
@@ -657,18 +672,39 @@ MODULES_MOCK_DATA = {
                     {"id": 12011, "name": "先101後故宮", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                     {"id": 12012, "name": "先故宮後101", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
                 ]
+            },
+            {
+                "id": 1202,
+                "name": "交通方式",
+                "isShowEmpty": True,
+                "options": [
+                    {"id": 12021, "name": "自行前往", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 12022, "name": "專車接送", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
             }
         ],
         "availableCombinations": [
             {
-                "combinationOptionId": "combo_[12011]",
-                "moduleOptionIds": [12011],
+                "combinationOptionId": "combo_[12011, null]",
+                "moduleOptionIds": [12011, None],
                 "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
                 "ticketOffering": None
             },
             {
-                "combinationOptionId": "combo_[12012]",
-                "moduleOptionIds": [12012],
+                "combinationOptionId": "combo_[12012, null]",
+                "moduleOptionIds": [12012, None],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 1000},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[12011, 12021]",
+                "moduleOptionIds": [12011, 12021],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[12011, 12022]",
+                "moduleOptionIds": [12011, 12022],
                 "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 1000},
                 "ticketOffering": None
             }
