@@ -561,4 +561,62 @@ MODULES_MOCK_DATA = {
             }
         ]
     },
+    # Package 10: 台北101+故宮聯票 (ticket pricing - 混合票券)
+    10: {
+        "modules": [
+            {
+                "id": 1001,
+                "name": "參觀順序",
+                "isShowEmpty": False,
+                "options": [
+                    {"id": 10011, "name": "先101後故宮", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 10012, "name": "先故宮後101", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
+            },
+            {
+                "id": 1002,
+                "name": "交通方式",
+                "isShowEmpty": True,
+                "options": [
+                    {"id": 10021, "name": "自行前往", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 10022, "name": "專車接送", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
+            }
+        ],
+        "availableCombinations": [
+            {
+                "combinationOptionId": "combo_[10011, null]",
+                "moduleOptionIds": [10011, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                ]
+            },
+            {
+                "combinationOptionId": "combo_[10012, null]",
+                "moduleOptionIds": [10012, None],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                ]
+            },
+            {
+                "combinationOptionId": "combo_[10011, 10021]",
+                "moduleOptionIds": [10011, 10021],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                ]
+            },
+            {
+                "combinationOptionId": "combo_[10011, 10022]",
+                "moduleOptionIds": [10011, 10022],
+                "singleOffering": None,
+                "ticketOffering": [
+                    {"id": TICKET_TYPE["ADULT"], "inventory": 25, "price": 0},
+                ]
+            }
+        ]
+    }
+
 }
