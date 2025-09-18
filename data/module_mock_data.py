@@ -617,6 +617,62 @@ MODULES_MOCK_DATA = {
                 ]
             }
         ]
+    },
+    # Package 11: 台北101+故宮聯票 (single pricing)
+    11: {
+        "modules": [
+            {
+                "id": 1101,
+                "name": "參觀順序",
+                "isShowEmpty": False,
+                "options": [
+                    {"id": 11011, "name": "先101後故宮", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 11012, "name": "先故宮後101", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
+            }
+        ],
+        "availableCombinations": [
+            {
+                "combinationOptionId": "combo_[11011]",
+                "moduleOptionIds": [11011],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[11012]",
+                "moduleOptionIds": [11012],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
+                "ticketOffering": None
+            }
+        ]
+    },
+    # Package 12: 台北101+故宮聯票 (single pricing)
+    12: {
+        "modules": [
+            {
+                "id": 1201,
+                "name": "參觀順序",
+                "isShowEmpty": False,
+                "options": [
+                    {"id": 12011, "name": "先101後故宮", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                    {"id": 12012, "name": "先故宮後101", "inventoryStatus": INVENTORY_STATUS["BOOKABLE"]},
+                ]
+            }
+        ],
+        "availableCombinations": [
+            {
+                "combinationOptionId": "combo_[12011]",
+                "moduleOptionIds": [12011],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 0},
+                "ticketOffering": None
+            },
+            {
+                "combinationOptionId": "combo_[12012]",
+                "moduleOptionIds": [12012],
+                "singleOffering": {"name": "人數", "unitCount": 1, "inventory": 25, "price": 1000},
+                "ticketOffering": None
+            }
+        ]
     }
 
 }
