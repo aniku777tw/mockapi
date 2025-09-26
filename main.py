@@ -26,9 +26,11 @@ app.add_middleware(
 from api.package_routes import router as package_router
 from api.module_routes import router as module_router
 from api.price_routes import router as price_router
+from api.order_routes import router as order_router
 app.include_router(package_router, prefix="/v1")
 app.include_router(module_router, prefix="/v1")
 app.include_router(price_router, prefix="/v1")
+app.include_router(order_router, prefix="/v1")
 
 # 自定義異常處理器
 @app.exception_handler(HTTPException)
