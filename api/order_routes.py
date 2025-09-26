@@ -70,6 +70,17 @@ async def preview_order(request_body: OrderPreviewRequest = Body(...)):
             )
             raise HTTPException(status_code=400, detail=error_response.model_dump())
         
+        # 驗證 singleCount 和 ticketCount 互斥性
+        if request_body.singleCount is not None and request_body.ticketCount is not None:
+            error_response = ErrorResponse(
+                status=Status(code="CP01005", msg="singleCount 和 ticketCount 不能同時存在"),
+                data={
+                    "singleCount": request_body.singleCount,
+                    "ticketCount": request_body.ticketCount
+                }
+            )
+            raise HTTPException(status_code=400, detail=error_response.model_dump())
+        
         # 使用服務取得對應的 mock 資料
         mock_data = order_service.preview_order(request_body.model_dump())
         
