@@ -45,10 +45,10 @@ async def preview_order(request_body: OrderPreviewRequest = Body(...)):
         # 驗證欄位互斥性
         request_dict = request_body.model_dump()
         
-        # 檢查是否有 normal case 欄位 (檢查 key 是否存在)
-        has_normal_case = any(key in request_dict for key in ["people", "thsr", "roomId", "ratePlanId"])
-        # 檢查是否有 package case 欄位 (檢查 key 是否存在)
-        has_package_case = any(key in request_dict for key in ["singleCount", "ticketCount", "combinationOptionId"])
+        # 檢查是否有 normal case 欄位 (檢查 key 是否存在且值不為 None)
+        has_normal_case = any(key in request_dict and request_dict[key] is not None for key in ["people", "thsr", "roomId", "ratePlanId"])
+        # 檢查是否有 package case 欄位 (檢查 key 是否存在且值不為 None)
+        has_package_case = any(key in request_dict and request_dict[key] is not None for key in ["singleCount", "ticketCount", "combinationOptionId"])
         
         if has_normal_case and has_package_case:
             error_response = ErrorResponse(
