@@ -43,13 +43,12 @@ async def preview_order(request_body: OrderPreviewRequest = Body(...)):
     """預覽訂單"""
     try:
         # 驗證欄位互斥性
-        normal_case_fields = [request_body.people, request_body.thsr, request_body.roomId, request_body.ratePlanId]
-        package_case_fields = [request_body.singleCount, request_body.ticketCount, request_body.combinationOptionId]
+        request_dict = request_body.model_dump()
         
-        # 檢查是否有 normal case 欄位
-        has_normal_case = any(field is not None for field in normal_case_fields)
-        # 檢查是否有 package case 欄位
-        has_package_case = any(field is not None for field in package_case_fields)
+        # 檢查是否有 normal case 欄位 (檢查 key 是否存在)
+        has_normal_case = any(key in request_dict for key in ["people", "thsr", "roomId", "ratePlanId"])
+        # 檢查是否有 package case 欄位 (檢查 key 是否存在)
+        has_package_case = any(key in request_dict for key in ["singleCount", "ticketCount", "combinationOptionId"])
         
         if has_normal_case and has_package_case:
             error_response = ErrorResponse(
