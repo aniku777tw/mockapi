@@ -73,7 +73,7 @@ async def preview_order(request_body: OrderPreviewRequest = Body(...)):
         # 驗證 singleCount 和 ticketCount 互斥性
         if request_body.singleCount is not None and request_body.ticketCount is not None:
             error_response = ErrorResponse(
-                status=Status(code="CP01005", msg="singleCount 和 ticketCount 不能同時存在"),
+                status=Status(code="CP01005", msg="singleCount 和 ticketCount 其中一者為 null"),
                 data={
                     "singleCount": request_body.singleCount,
                     "ticketCount": request_body.ticketCount
