@@ -93,6 +93,16 @@ async def preview_order(request_body: dict = Body(...)):
                 }
             )
             raise HTTPException(status_code=400, detail=error_response.model_dump())
+
+        if request_body.get("singleCount") is None and request_body.get("ticketCount") is None:
+            error_response = ErrorResponse(
+                status=Status(code="CP01005", msg="singleCount 和 ticketCount 不能同時為 null"),
+                data={
+                    "singleCount": request_body.get("singleCount"),
+                    "ticketCount": request_body.get("ticketCount")
+                }
+            )
+            raise HTTPException(status_code=400, detail=error_response.model_dump())
         
         # 使用服務取得對應的 mock 資料
         mock_data = order_service.preview_order(request_body)
